@@ -3,6 +3,17 @@ var router = express.Router()
 
 const { DateTime } = require('luxon')
 
+/* GET date without parameter. */
+router.get('/', function (req, res, next) {
+  const dt = DateTime
+
+  const unix = Math.floor(Date.now())
+  const utc = dt.fromJSDate(new Date(unix)).toHTTP()
+
+  res.json({ unix: unix, utc: utc })
+  return
+})
+
 /* GET date. */
 router.get('/:date', function (req, res, next) {
   const timestamp = req.params.date
